@@ -1,0 +1,16 @@
+contours,hierarchy = cv2.findContours(thresh, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
+imgCopy = np.copy(img)
+digitos = []
+centros = []
+imgCopy2 = np.copy(img)
+for cnt in contours:
+    x,y,w,h = cv2.boundingRect(cnt)
+    if h > ALTURA_MIN_DIGITO and h < ALTURA_MAX_DIGITO and w > LARGURA_MIN_DIGITO:
+        digitos.append(cnt);
+        M = cv2.moments(cnt)
+        cX = int(M["m10"] / M["m00"])
+        cY = int(M["m01"] / M["m00"])
+        centros.append([cX,cY])
+        imgContornos = cv2.rectangle(imgCopy,(x,y),(x+w,y+h),(0,255,0),2)
+plt.imshow(imgContornos, cmap = 'gray', interpolation = 'bicubic')
+print(centros)

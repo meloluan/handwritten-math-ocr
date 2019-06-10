@@ -1,0 +1,7 @@
+jupyter
+opencv-python
+numpy
+matplotlib
+pickleshare
+keras
+tensorflow
